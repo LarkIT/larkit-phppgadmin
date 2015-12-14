@@ -1,0 +1,33 @@
+<?php
+
+<% @servers.each_with_index do |server, index| -%>
+<% server.each do |k,v| -%>
+  <% if !!v == v -%>
+<%= "$conf['servers'][#{index}]['#{k}'] = #{v}.upcase;" %>
+  <% else -%>
+<%= "$conf['servers'][#{index}]['#{k}'] = '#{v}';" %>
+  <% end -%>
+<% end -%>
+<% end -%>
+
+<% @srv_groups.each_with_index do |group, index| -%>
+<% group.each do |k,v| -%>
+  <% if !!v == v -%>
+<%= "$conf['srv_groups'][#{index}]['#{k}'] = #{v}.upcase;" %>
+  <% else -%>
+<%= "$conf['srv_groups'][#{index}]['#{k}'] = '#{v}';" %>
+  <% end -%>
+<% end -%>
+<% end -%>
+
+<% @config.each do |k, v| -%>
+<%= "$conf['#{k}'] = '#{v}';" %>
+<% end -%>
+
+	/*****************************************
+	 * Don't modify anything below this line *
+	 *****************************************/
+
+	$conf['version'] = 19;
+
+?>
