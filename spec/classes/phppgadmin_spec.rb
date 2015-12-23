@@ -17,6 +17,7 @@ describe 'phppgadmin' do
 
           it { is_expected.to contain_package('phpPgAdmin').with(:ensure => 'present') }
           it { is_expected.to contain_file('/etc/phpPgAdmin/config.inc.php').with(:owner => 'apache', :group => 'apache')}
+          it { is_expected.not_to contain_file('/etc/phpPgAdmin/config.inc.php').with(:content => /\$conf\['servers'\]/)}
         end
 
         context "set package, version, config file, user, group" do
