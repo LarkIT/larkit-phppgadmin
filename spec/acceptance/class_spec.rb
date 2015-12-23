@@ -17,6 +17,5 @@ describe 'phppgadmin class' do
     describe package('phpPgAdmin') do
       it { is_expected.to be_installed }
     end
-
   end
 end

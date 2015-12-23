@@ -55,7 +55,6 @@ describe 'phppgadmin' do
             it { expect { is_expected.to contain_class('phppgadmin') }.to raise_error(Puppet::Error, /is not an absolute path/) }
           end
         end #failures
-
       end # on os
     end
   end
