@@ -1,7 +1,7 @@
 <?php
 
-<% @servers.each_with_index do |server, index| -%>
-<% server.each do |k,v| -%>
+<% Array(@servers).each_index do |index| -%>
+<% @servers[index].each do |k,v| -%>
   <% if !!v == v -%>
 <%= "$conf['servers'][#{index}]['#{k}'] = #{v}.upcase;" %>
   <% else -%>
@@ -10,8 +10,8 @@
 <% end -%>
 <% end -%>
 
-<% @srv_groups.each_with_index do |group, index| -%>
-<% group.each do |k,v| -%>
+<% Array(@srv_groups).each_index do |index| -%>
+<% @srv_groups[index].each do |k,v| -%>
   <% if !!v == v -%>
 <%= "$conf['srv_groups'][#{index}]['#{k}'] = #{v}.upcase;" %>
   <% else -%>
@@ -29,5 +29,7 @@
 	 *****************************************/
 
 	$conf['version'] = 19;
+  $conf['left_width'] = 200;
+  $conf['plugins'] = array();
 
 ?>

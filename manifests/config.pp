@@ -4,7 +4,6 @@
 #
 class phppgadmin::config (
   $config      = $::phppgadmin::real_config,
-  $secret      = $::phppgadmin::secret,
   $servers     = $::phppgadmin::servers,
 ){
 
