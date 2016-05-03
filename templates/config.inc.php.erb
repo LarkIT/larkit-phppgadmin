@@ -1,4 +1,25 @@
 <?php
+### NOTE: This file is maintained by puppet, any local changes will be lost.
+
+# DEFAULTS -- will be overridden by user defined settings
+        $conf['default_lang'] = 'auto';
+        $conf['autocomplete'] = 'default on';
+        $conf['extra_login_security'] = true;
+        $conf['owned_only'] = false;
+        $conf['show_comments'] = true;
+        $conf['show_advanced'] = false;
+        $conf['show_system'] = false;
+        $conf['min_password_length'] = 1;
+        $conf['left_width'] = 200;
+        $conf['theme'] = 'default';
+        $conf['show_oids'] = false;
+        $conf['max_rows'] = 30;
+        $conf['max_chars'] = 50;
+        $conf['use_xhtml_strict'] = false;
+        $conf['help_base'] = 'http://www.postgresql.org/docs/%s/interactive/';
+        $conf['ajax_refresh'] = 3;
+        $conf['plugins'] = array();
+# END DEFAULTS
 
 <% Array(@servers).each_index do |index| -%>
 <% @servers[index].each do |k,v| -%>
@@ -11,17 +32,21 @@
 <% end -%>
 
 <% Array(@srv_groups).each_index do |index| -%>
-<% @srv_groups[index].each do |k,v| -%>
-  <% if !!v == v -%>
+<%   @srv_groups[index].each do |k,v| -%>
+<%     if !!v == v -%>
 <%= "$conf['srv_groups'][#{index}]['#{k}'] = #{v}.upcase;" %>
-  <% else -%>
+  <%   else -%>
 <%= "$conf['srv_groups'][#{index}]['#{k}'] = '#{v}';" %>
-  <% end -%>
-<% end -%>
+<%     end -%>
+<%   end -%>
 <% end -%>
 
 <% @config.each do |k, v| -%>
+<%   if k.eql? 'plugins' and v.kind_of? (Array) -%>
+<%= "$conf['#{k}'] = explode(',', '#{v.join(',')}');" %>
+<%   else -%>
 <%= "$conf['#{k}'] = '#{v}';" %>
+<%   end -%>
 <% end -%>
 
 	/*****************************************
@@ -29,7 +54,5 @@
 	 *****************************************/
 
 	$conf['version'] = 19;
-  $conf['left_width'] = 200;
-  $conf['plugins'] = array();
 
 ?>
