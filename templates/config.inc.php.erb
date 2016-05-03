@@ -42,7 +42,7 @@
 <% end -%>
 
 <% @config.each do |k, v| -%>
-<%   if k.eql? 'plugins' and v.kind_of? (Array) -%>
+<%   if k.eql? 'plugins' and v.kind_of?(Array) -%>
 <%= "$conf['#{k}'] = explode(',', '#{v.join(',')}');" %>
 <%   else -%>
 <%= "$conf['#{k}'] = '#{v}';" %>
